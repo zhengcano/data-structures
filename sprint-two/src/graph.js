@@ -39,7 +39,7 @@ Graph.prototype.forEachNode = function(cb){
   for (var key in this){
     console.log(this, key, this[key]);
     if (this[key].edges !== undefined){
-      cb(this[key]);
+      cb(key);
     }
   }
 

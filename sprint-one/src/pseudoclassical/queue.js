@@ -28,5 +28,3 @@ Queue.prototype.count = function (value) {
   }
   return value;
 };
-
-var newQueue = new Queue();

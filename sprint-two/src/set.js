@@ -7,7 +7,7 @@ var Set = function(){
 var setPrototype = {};
 
 setPrototype.add = function(item){
-  if (this._storage){
+  if (this._storage === undefined){
     this._storage = {};
   }
   this._storage[item] = item;

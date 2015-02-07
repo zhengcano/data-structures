@@ -3,12 +3,32 @@ var HashTable = function(){
   this._storage = LimitedArray(this._limit);
 };
 
+HashTable.prototype.sizeUp = function(){
+  var oldLimit = this._limit;
+  this._limit = this._limit * 2;
+  var newStorage = LimitedArray(this._limit);
+  this._storage.each( function (bucket){
+    for (var i =0; i<bucket.length; i++){
+      var h = getIndexBelowMaxForKey(bucket[i][0], this._limit);
+      newStorage.set()
+    }
+  });
+  this._storage = newStorage;
+};
+
 HashTable.prototype.insert = function(k, v){
   var i = getIndexBelowMaxForKey(k, this._limit);
-  //this._storage.set(i, v);
+  // if (argument[2] !== this._storage){
+  // var total = 0;
+  // this._storage.each(function(val){if (Array.isArray(val)){
+  //   total++;});
+  // }
+  // if (total > (this._limit * 0.75)){
+  //   this.sizeUp();
+  // }
   var temp = [];
   var bucket = this._storage.get(i);
-  if (bucket){
+  if (bucket === null || bucket === undefined){
     temp.push([k, v]);
     this._storage.set(i, temp);
   }

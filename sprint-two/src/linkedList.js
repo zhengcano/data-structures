@@ -14,9 +14,40 @@ var LinkedList = function(){
     }
   };
 
+  list.addToHead = function(value){
+    if (list.tail === null){
+      list.head = Node(value);
+      list.tail = list.head;
+    } else {
+      list.head.previous = Node(value);
+      list.head.previous.next = list.head;
+      list.head = list.head.previous;
+    }
+  };
+
+  list.removeTail = function(){
+    var temp = list.tail.value;
+    if (this.tail.previous){
+      list.tail = list.tail.previous;
+      list.tail.next = null;
+    }
+    else if (list.head === list.tail){
+      list.head = null;
+      list.tail = null;
+    }
+    return temp;
+  };
+
   list.removeHead = function(){
     var temp = list.head.value;
-    list.head = list.head.next;
+    if (this.head.next){
+      list.head = list.head.next;
+      list.head.previous = null;
+    }
+    else if (list.head === list.tail){
+      list.head = null;
+      list.tail = null;
+    }
     return temp;
   };
 

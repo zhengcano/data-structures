@@ -1,15 +1,17 @@
 var BinarySearchTree = function(value){
-  var newTree = Object.create(bsnMethods);
+  var newTree = Object.create(bstMethods);
   newTree.value = value;
+  newTree.left = null;
+  newTree.right = null;
 
   return newTree;
 };
 
-bsnMethods = {};
+bstMethods = {};
 
-bsnMethods.insert = function (value){
+bstMethods.insert = function (value){
   if (value < this.value){
-    if(this.hasOwnProperty('left')){
+    if(this.left){
       this.left.insert(value);
     } else {
       this.left = BinarySearchTree(value);
@@ -17,40 +19,38 @@ bsnMethods.insert = function (value){
   }
 
   if (value > this.value){
-    if(this.hasOwnProperty('right')){
+    if(this.right){
       this.right.insert(value);
     } else {
       this.right = BinarySearchTree(value);
     }
   }
 
-
 };
 
-bsnMethods.contains = function (value){
-  var isThere = false;
+bstMethods.contains = function (value){
   if (value === this.value){
-    isThere = true;
+    return true;
   } else if (value < this.value){
-    if (this.hasOwnProperty('left')){
-      isThere = this.left.contains(value);
+    if (this.left){
+      return this.left.contains(value);
     }
   }
   else {
-    if (this.hasOwnProperty('right')){
-      isThere = this.right.contains(value);
+    if (this.right){
+      return this.right.contains(value);
     }
   }
-  return isThere;
+  return false;
 };
 
-bsnMethods.depthFirstLog = function (cb){
+bstMethods.depthFirstLog = function (cb){
   cb(this.value);
-  if (this.hasOwnProperty('left')){
+  if (this.left){
     this.left.depthFirstLog(cb);
   }
 
-  if (this.hasOwnProperty('right')){
+  if (this.right){
     this.right.depthFirstLog(cb);
   }
 

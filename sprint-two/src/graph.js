@@ -46,7 +46,6 @@ Graph.prototype.forEachNode = function(cb){
       cb(key);
     }
   }
-
 };
 
 var GraphNode = function (){

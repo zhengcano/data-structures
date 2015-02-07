@@ -8,7 +8,7 @@ HashTable.prototype.insert = function(k, v){
   //this._storage.set(i, v);
   var temp = [];
   var bucket = this._storage.get(i);
-  if (bucket === undefined || bucket ===null){
+  if (bucket){
     temp.push([k, v]);
     this._storage.set(i, temp);
   }

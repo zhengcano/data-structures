@@ -55,6 +55,21 @@ describe('tree', function() {
     expect(tree.children.length).to.equal(1);
     expect(tree.children[0]).to.equal(child2);
     expect(removed).to.equal(child);
-  })
+  });
+
+  it('should expect a callback to execute on every tree node', function(){
+    var treeValues = 0;
+    tree.addChild(1);
+    tree.addChild(2);
+    tree.children[0].addChild(3);
+    tree.children[1].addChild(4);
+    var addValue = function (value){
+      if (typeof value === 'number'){
+        treeValues += value;
+      }
+    };
+    tree.traverse(addValue);
+    expect(treeValues).to.equal(10);
+  });
 
 });

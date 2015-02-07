@@ -23,13 +23,11 @@ treeMethods.addChild = function(value){
 };
 
 treeMethods.removeFromParent = function(){
-  console.log(this.parent.children);
   for (var i = 0; i< this.parent.children.length; i++) {
     if ( this.parent.children[i] === this){
       this.parent.children.splice(i, 1);
     }
   }
-  console.log(this.parent.children);
   this.parent = null;
   return this;
 };
@@ -47,13 +45,21 @@ treeMethods.contains = function(target){
   return isThere;
 };
 
+treeMethods.traverse = function(cb, node){
+  node = node || this;
+  cb(node.value);
+  for (var i = 0; i < node.children.length; i++){
+    node.traverse(cb, node.children[i]);
+  }
+};
+
 var extend = function(obj){
   for (var i =1; i<arguments.length; i++){
     for (var key in arguments[i]){
       obj[key]=arguments[i][key];
     }
   }
-}
+};
 
 /*
  * Complexity: What is the time complexity of the above functions?

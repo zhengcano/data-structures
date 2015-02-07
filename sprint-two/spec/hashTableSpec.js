@@ -55,16 +55,12 @@ describe('hashTable', function() {
       var firstName = person[0], lastName = person[1];
       hashTable.insert(firstName,lastName);
     });
-    console.log(hashTable._limit, hashTable.total);
-    console.dir(hashTable);
     expect(hashTable._limit).to.equal(16);
     hashTable.remove('George');
     hashTable.remove('Dr.');
     hashTable.remove('Steven');
     hashTable.remove('John');
     hashTable.remove('Mr.');
-    console.log(hashTable._limit, hashTable.total);
-    console.dir(hashTable);
     expect(hashTable._limit).to.equal(8);
   });
 });

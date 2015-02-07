@@ -71,7 +71,6 @@ HashTable.prototype.remove = function(k){
   var i = getIndexBelowMaxForKey(k, this._limit);
   //this._storage.set(i, null);
   var bucket = this._storage.get(i);
-  console.log(bucket);
   if (Array.isArray(bucket)){
     if (bucket.length > 1){
       for (var j = 0; j < bucket.length; j++){

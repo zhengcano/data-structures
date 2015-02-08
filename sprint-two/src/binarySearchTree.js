@@ -3,6 +3,8 @@ var BinarySearchTree = function(value){
   newTree.value = value;
   newTree.left = null;
   newTree.right = null;
+  newTree.level = 0;
+  newTree.self = newTree;
 
   return newTree;
 };
@@ -15,6 +17,7 @@ bstMethods.insert = function (value){
       this.left.insert(value);
     } else {
       this.left = BinarySearchTree(value);
+      this.left.level = this.level + 1;
     }
   }
 
@@ -23,6 +26,7 @@ bstMethods.insert = function (value){
       this.right.insert(value);
     } else {
       this.right = BinarySearchTree(value);
+      this.right.level = this.level + 1;
     }
   }
 
@@ -44,14 +48,31 @@ bstMethods.contains = function (value){
   return false;
 };
 
-bstMethods.depthFirstLog = function (cb){
-  cb(this.value);
-  if (this.left){
-    this.left.depthFirstLog(cb);
-  }
+bstMethods.breadthFirstLog = function(cb){
+  var storage = [];
+  this.depthFirstLog(function(node){
+    if(Array.isArray(storage[node.level])){
+      storage[node.level].push(node.value);
+    } else {
+      storage[node.level] = [];
+      storage[node.level].push(node.value);
+    }
+  }, 'self');
+  for (var i = 0; i< storage.length; i++){
+    for (var j = 0; j< storage[i].length; j++){
+      cb(storage[i][j]);
+    };
+  };
+};
 
+bstMethods.depthFirstLog = function (cb, key){
+  key = key || 'value';
+  cb(this[key]);
+  if (this.left){
+    this.left.depthFirstLog(cb, key);
+  }
   if (this.right){
-    this.right.depthFirstLog(cb);
+    this.right.depthFirstLog(cb, key);
   }
 
 };
